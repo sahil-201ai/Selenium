@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import time
 
 # Set the path to the ChromeDriver
-chrome_driver_path = 'path/to/your/chromedriver'  # Change this to your actual path
+chrome_driver_path = 'usr/local/bin/chromedriver'  # Change this to your actual path
 
 # Set up the WebDriver
 service = Service(chrome_driver_path)
