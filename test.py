@@ -1,30 +1,36 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import time
 
-# Set the path to the ChromeDriver
-chrome_driver_path = 'usr/local/bin/chromedriver'  # Change this to your actual path
+# Path to your ChromeDriver
+chromedriver_path = "/use/local/bin/chromedriver"
 
-# Set up the WebDriver
-service = Service(chrome_driver_path)
-driver = webdriver.Chrome(service=service)
+# Set up Chrome options for headless mode
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Run in headless mode
+chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+chrome_options.add_argument("--disable-dev-shm-usage")  # Overcome limited resource problems
+
+# Initialize the Chrome driver
+service = Service(chromedriver_path)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 try:
-    # Go to Google.com
+    # Open Google
     driver.get("https://www.google.com")
-    
-    # Wait for a few seconds to ensure the site loads completely
+
+    # Optional: Wait for a few seconds to ensure the page loads
     time.sleep(3)
     
-    # Check if the title contains "Google"
+    # Check if the title of the page is correct
     if "Google" in driver.title:
-        print("Successfully went to the site.")
+        print("Successfully opened the site: Google")
     else:
-        print("Failed to reach the expected site.")
-
+        print("Failed to open the site: Google")
 finally:
-    # Close the browser
+    # Clean up and close the driver
     driver.quit()
 
 
